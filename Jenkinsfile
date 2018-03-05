@@ -1,4 +1,3 @@
-env.PRODUCTION = '10.0.15.31'
 node {
     def app
     stage('Build Docker Image') {
@@ -13,7 +12,7 @@ node {
     }
 
     stage('Deploy to Production') {
-        docker.withServer("tcp://${PRODUCTION}:2376", 'production') {
+        docker.withServer('tcp://production:2376', 'production') {
             sh 'docker run -d prasantk/sample-node-app'
         }
     }
